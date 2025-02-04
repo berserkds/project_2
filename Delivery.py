@@ -1,29 +1,20 @@
-# 132754491
-def main(data: list, limit: int) -> int:
-    remains = []
-    total = 0
-    for number in data:
-        if number == limit:
-            total += 1
-        else:
-            remains.append(number)
-    remains.sort()
-    left_pointer = 0
-    right_pointer = len(remains) - 1
-    while left_pointer <= right_pointer:
-        summ = remains[left_pointer] + remains[right_pointer]
-        if summ == limit or summ < limit:
-            total += 1
-            left_pointer += 1
-            right_pointer -= 1
-        else:
-            total += 1
-            right_pointer -= 1
+# 132812177
+def delivery(data: list, limit: int) -> int:
+    sorted_data: list = sorted(data)
+    total: int = 0
+    light: int = 0
+    heavy: int = len(data) - 1
+    while light <= heavy:
+        summ = sorted_data[light] + sorted_data[heavy]
+        if (summ == limit or summ < limit):
+            light += 1
+        total += 1
+        heavy -= 1
     return total
 
 
 if __name__ == '__main__':
-    mas_of_rob = list(map(int, input().split()))
+    mas_of_rob = [int(number) for number in input().split()]
     limit_mas = int(input())
-    result = main(mas_of_rob, limit_mas)
+    result = delivery(mas_of_rob, limit_mas)
     print(result)
